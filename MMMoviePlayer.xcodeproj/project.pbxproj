@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1176B3DECB31CC824BC24180 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176B0D263236CFF66DC4387 /* NotificationExtension.swift */; };
 		13350D6F1F9C501C005F6BD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D6E1F9C501C005F6BD4 /* AppDelegate.swift */; };
 		13350D711F9C501C005F6BD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D701F9C501C005F6BD4 /* ViewController.swift */; };
 		13350D741F9C501C005F6BD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13350D721F9C501C005F6BD4 /* Main.storyboard */; };
@@ -14,6 +15,9 @@
 		13350D791F9C501C005F6BD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13350D771F9C501C005F6BD4 /* LaunchScreen.storyboard */; };
 		13350D841F9C501C005F6BD4 /* MMMoviePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D831F9C501C005F6BD4 /* MMMoviePlayerTests.swift */; };
 		13350D8F1F9C501C005F6BD4 /* MMMoviePlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D8E1F9C501C005F6BD4 /* MMMoviePlayerUITests.swift */; };
+		13350D9D1F9C51C7005F6BD4 /* MoviePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D9C1F9C51C7005F6BD4 /* MoviePlayerView.swift */; };
+		13350D9F1F9C51E4005F6BD4 /* MoviePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */; };
+		13B4DFDB1F9E061000733C58 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4DFDA1F9E061000733C58 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1176B0D263236CFF66DC4387 /* NotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		13350D6B1F9C501C005F6BD4 /* MMMoviePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMMoviePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13350D6E1F9C501C005F6BD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13350D701F9C501C005F6BD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +52,9 @@
 		13350D8A1F9C501C005F6BD4 /* MMMoviePlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMMoviePlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13350D8E1F9C501C005F6BD4 /* MMMoviePlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMMoviePlayerUITests.swift; sourceTree = "<group>"; };
 		13350D901F9C501C005F6BD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13350D9C1F9C51C7005F6BD4 /* MoviePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlayerView.swift; sourceTree = "<group>"; };
+		13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviePlayerView.xib; sourceTree = "<group>"; };
+		13B4DFDA1F9E061000733C58 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 				13350D751F9C501C005F6BD4 /* Assets.xcassets */,
 				13350D771F9C501C005F6BD4 /* LaunchScreen.storyboard */,
 				13350D7A1F9C501C005F6BD4 /* Info.plist */,
+				13350D9C1F9C51C7005F6BD4 /* MoviePlayerView.swift */,
+				13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */,
+				1176B0D263236CFF66DC4387 /* NotificationExtension.swift */,
+				13B4DFDA1F9E061000733C58 /* PlayerView.swift */,
 			);
 			path = MMMoviePlayer;
 			sourceTree = "<group>";
@@ -232,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13350D9F1F9C51E4005F6BD4 /* MoviePlayerView.xib in Resources */,
 				13350D791F9C501C005F6BD4 /* LaunchScreen.storyboard in Resources */,
 				13350D761F9C501C005F6BD4 /* Assets.xcassets in Resources */,
 				13350D741F9C501C005F6BD4 /* Main.storyboard in Resources */,
@@ -260,7 +273,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13350D711F9C501C005F6BD4 /* ViewController.swift in Sources */,
+				13350D9D1F9C51C7005F6BD4 /* MoviePlayerView.swift in Sources */,
 				13350D6F1F9C501C005F6BD4 /* AppDelegate.swift in Sources */,
+				13B4DFDB1F9E061000733C58 /* PlayerView.swift in Sources */,
+				1176B3DECB31CC824BC24180 /* NotificationExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
