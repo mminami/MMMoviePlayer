@@ -63,6 +63,7 @@ class MoviePlayerView: UIView {
     private let observedKeyPaths = [
         #keyPath(AVPlayer.currentItem.status),
         #keyPath(AVPlayer.rate),
+        #keyPath(AVPlayer.currentItem.duration),
         #keyPath(AVPlayer.timeControlStatus),
     ]
 
@@ -196,6 +197,28 @@ class MoviePlayerView: UIView {
             }
         case #keyPath(AVPlayer.rate):
             print("rate: \(player.rate)")
+        case #keyPath(AVPlayer.currentItem.duration):
+            let duration: CMTime
+            if let value = change?[.newKey] as? NSValue {
+                duration = value.timeValue
+            } else {
+                duration = kCMTimeZero
+            }
+
+            let isValidDuration = duration.isValid && duration.value != 0
+            let durationSeconds = isValidDuration ? Float(CMTimeGetSeconds(duration)) : 0.0
+            let currentTime = isValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
+
+            slider.isEnabled = isValidDuration
+            slider.maximumValue = durationSeconds
+            slider.value = currentTime
+
+            progressTimeLabel.isEnabled = isValidDuration
+            progressTimeLabel.text = currentTime.timeString
+
+            totalTimeLabel.isEnabled = isValidDuration
+            totalTimeLabel.text = durationSeconds.timeString
+
         case #keyPath(AVPlayer.timeControlStatus):
             print("timeControlStatus")
 
