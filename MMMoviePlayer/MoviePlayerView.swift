@@ -10,6 +10,19 @@ import Foundation
 import UIKit
 import AVFoundation
 
+extension Float {
+    var timeString: String {
+        let components = NSDateComponents()
+        components.second = Int(max(0.0, self))
+
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.hour, .minute, .second]
+
+        return formatter.string(for: components as DateComponents)!
+    }
+}
+
 
 protocol MoviePlayerViewDataSource: class {
     func movieURL(in view: MoviePlayerView) -> URL
@@ -44,6 +57,8 @@ class MoviePlayerView: UIView {
     var dataSource: MoviePlayerViewDataSource?
 
     private var player =  AVPlayer()
+
+    private var timeObserverToken: Any?
 
     private let observedKeyPaths = [
         #keyPath(AVPlayer.currentItem.status),
@@ -94,6 +109,11 @@ class MoviePlayerView: UIView {
 
         player.pause()
 
+        if let token = timeObserverToken {
+            player.removeTimeObserver(token)
+            timeObserverToken = nil
+        }
+
         removeObserver()
     }
 
@@ -108,6 +128,12 @@ class MoviePlayerView: UIView {
         let asset = AVURLAsset(url: url, options: nil)
         let item = AVPlayerItem(asset: asset)
         player.replaceCurrentItem(with: item)
+
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { [unowned self] time  in
+            let timeProgress = Float(CMTimeGetSeconds(time))
+            self.slider.value = timeProgress
+            self.progressTimeLabel.text = timeProgress.timeString
+         }
     }
 
     func play() {
