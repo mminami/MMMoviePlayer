@@ -12,7 +12,7 @@ import AVFoundation
 
 
 protocol MoviePlayerViewDataSource: class {
-    func playerItem(in view: MoviePlayerView) -> AVPlayerItem
+    func movieURL(in view: MoviePlayerView) -> URL
 }
 
 private var playerObserveContext = 0
@@ -32,8 +32,8 @@ class MoviePlayerView: UIView {
     @IBAction func playButtonDidTap(_ sender: UIButton) {
         if let status = playerView.player?.timeControlStatus {
             switch status {
-            case .paused: player?.play()
-            case .playing: player?.pause()
+            case .paused: player.play()
+            case .playing: player.pause()
             case .waitingToPlayAtSpecifiedRate: break
             }
         }
@@ -43,11 +43,7 @@ class MoviePlayerView: UIView {
 
     var dataSource: MoviePlayerViewDataSource?
 
-    private var player: AVPlayer? {
-        didSet {
-            playerView.player = player
-        }
-    }
+    private var player =  AVPlayer()
 
     private let observedKeyPaths = [
         #keyPath(AVPlayer.currentItem.status),
@@ -76,13 +72,27 @@ class MoviePlayerView: UIView {
 
         self.addSubview(contentView)
 
-        print("commoninit")
+        print("commonInit")
     }
 
-    // MARK: Live cycle
+    // MARK: Life cycle
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+
+        playerView.player = player
+
+        for keyPath in observedKeyPaths {
+            self.player.addObserver(self,
+                    forKeyPath: keyPath,
+                    options: [.new, .initial],
+                    context: &playerObserveContext)
+        }
+    }
 
     override func removeFromSuperview() {
         super.removeFromSuperview()
+
+        player.pause()
 
         removeObserver()
     }
@@ -90,23 +100,18 @@ class MoviePlayerView: UIView {
     // MARK: API
 
     func prepareToPlay() {
-        guard let playerItem = self.dataSource?.playerItem(in: self) else {
-            print("PlayerItem is not set")
+        guard let url = self.dataSource?.movieURL(in: self) else {
+            print("URL is not set")
             return
         }
 
-        self.player = AVPlayer(playerItem: playerItem)
-
-        for keyPath in observedKeyPaths {
-            self.player?.addObserver(self,
-                                     forKeyPath: keyPath,
-                                     options: [.new, .initial],
-                                     context: &playerObserveContext)
-        }
+        let asset = AVURLAsset(url: url, options: nil)
+        let item = AVPlayerItem(asset: asset)
+        player.replaceCurrentItem(with: item)
     }
 
     func play() {
-        if self.player?.currentItem?.status != AVPlayerItemStatus.readyToPlay {
+        if self.player.currentItem?.status != AVPlayerItemStatus.readyToPlay {
             print("Can not play")
             return
         }
@@ -118,8 +123,7 @@ class MoviePlayerView: UIView {
 
     private func removeObserver() {
         for keyPath in observedKeyPaths {
-            self.player?.removeObserver(self,
-                                        forKeyPath: keyPath)
+            self.player.removeObserver(self, forKeyPath: keyPath)
         }
     }
 
@@ -165,7 +169,7 @@ class MoviePlayerView: UIView {
                 )
             }
         case #keyPath(AVPlayer.rate):
-            print("rate: \(player!.rate)")
+            print("rate: \(player.rate)")
         case #keyPath(AVPlayer.timeControlStatus):
             print("timeControlStatus")
 
