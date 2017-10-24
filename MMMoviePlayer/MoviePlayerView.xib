@@ -12,11 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviePlayerView" customModule="MMMoviePlayer" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="7eY-JP-L56" id="sra-Og-heh"/>
+                <outlet property="durationTimeLabel" destination="xm2-MI-2Zd" id="w2i-Ti-cU0"/>
                 <outlet property="playButton" destination="syO-lt-MMc" id="4G5-i6-gA1"/>
                 <outlet property="playerView" destination="GIk-0l-f4w" id="mJK-61-6Dj"/>
                 <outlet property="progressTimeLabel" destination="aYR-dt-2oS" id="7CA-WK-p1K"/>
                 <outlet property="slider" destination="LXj-tz-Pgn" id="YK3-fP-GIG"/>
-                <outlet property="totalTimeLabel" destination="xm2-MI-2Zd" id="w2i-Ti-cU0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -44,13 +44,13 @@
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LXj-tz-Pgn">
                     <rect key="frame" x="44" y="278" width="330" height="31"/>
                 </slider>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xm2-MI-2Zd">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xm2-MI-2Zd">
                     <rect key="frame" x="376" y="282" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYR-dt-2oS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aYR-dt-2oS">
                     <rect key="frame" x="0.0" y="282.5" width="42" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="42" id="2aQ-oZ-efJ"/>

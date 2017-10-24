@@ -38,7 +38,7 @@ class MoviePlayerView: UIView {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var progressTimeLabel: UILabel!
-    @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var durationTimeLabel: UILabel!
 
     // MARK: UIAction
 
@@ -216,8 +216,8 @@ class MoviePlayerView: UIView {
             progressTimeLabel.isEnabled = isValidDuration
             progressTimeLabel.text = currentTime.timeString
 
-            totalTimeLabel.isEnabled = isValidDuration
-            totalTimeLabel.text = durationSeconds.timeString
+            durationTimeLabel.isEnabled = isValidDuration
+            durationTimeLabel.text = durationSeconds.timeString
 
         case #keyPath(AVPlayer.timeControlStatus):
             print("timeControlStatus")
