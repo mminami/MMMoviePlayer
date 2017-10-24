@@ -23,6 +23,9 @@ class MoviePlayerView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var progressTimeLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
 
     // MARK: UIAction
 
