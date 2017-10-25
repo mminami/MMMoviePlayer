@@ -21,14 +21,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="7eY-JP-L56">
-            <rect key="frame" x="0.0" y="0.0" width="418" height="308"/>
+            <rect key="frame" x="0.0" y="0.0" width="256" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIk-0l-f4w" customClass="PlayerView" customModule="MMMoviePlayer" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="418" height="278"/>
+                    <rect key="frame" x="0.0" y="0.0" width="256" height="206"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syO-lt-MMc">
-                            <rect key="frame" x="194" y="124" width="31" height="30"/>
+                            <rect key="frame" x="113" y="88" width="31" height="30"/>
                             <state key="normal" title="再生"/>
                             <connections>
                                 <action selector="playButtonDidTap:" destination="-1" eventType="touchUpInside" id="oJd-aY-Ygm"/>
@@ -42,16 +42,16 @@
                     </constraints>
                 </view>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LXj-tz-Pgn">
-                    <rect key="frame" x="44" y="278" width="330" height="31"/>
+                    <rect key="frame" x="44" y="206" width="168" height="31"/>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xm2-MI-2Zd">
-                    <rect key="frame" x="376" y="282" width="42" height="21"/>
+                    <rect key="frame" x="214" y="210" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aYR-dt-2oS">
-                    <rect key="frame" x="0.0" y="282.5" width="42" height="21"/>
+                    <rect key="frame" x="0.0" y="210.5" width="42" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="42" id="2aQ-oZ-efJ"/>
                     </constraints>
@@ -76,7 +76,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="e0T-Cj-Ov8"/>
-            <point key="canvasLocation" x="314" y="-256"/>
+            <point key="canvasLocation" x="233" y="-292"/>
         </view>
     </objects>
 </document>

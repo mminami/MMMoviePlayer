@@ -87,11 +87,17 @@ class MoviePlayerView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(contentView)
-
-        print("commonInit")
     }
 
+
     // MARK: Life cycle
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = self.bounds
+    }
+
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
 
