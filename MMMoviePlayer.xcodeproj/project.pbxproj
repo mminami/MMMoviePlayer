@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1176B3DECB31CC824BC24180 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176B0D263236CFF66DC4387 /* NotificationExtension.swift */; };
+		1176B3E992985E1C73310901 /* MovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176BB1F97DDC44DF375EAD7 /* MovieItem.swift */; };
 		1176B522B6F326BF76423B85 /* MovieItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1176BA216ECDC20460B8DDF7 /* MovieItemEntity.swift */; };
 		13350D6F1F9C501C005F6BD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D6E1F9C501C005F6BD4 /* AppDelegate.swift */; };
 		13350D711F9C501C005F6BD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D701F9C501C005F6BD4 /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		1176B0D263236CFF66DC4387 /* NotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		1176BA216ECDC20460B8DDF7 /* MovieItemEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieItemEntity.swift; sourceTree = "<group>"; };
+		1176BB1F97DDC44DF375EAD7 /* MovieItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieItem.swift; sourceTree = "<group>"; };
 		13350D6B1F9C501C005F6BD4 /* MMMoviePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMMoviePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13350D6E1F9C501C005F6BD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13350D701F9C501C005F6BD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				13B4DFDA1F9E061000733C58 /* PlayerView.swift */,
 				136AF05B1FA35D57008881A9 /* MovieListViewController.swift */,
 				1176BA216ECDC20460B8DDF7 /* MovieItemEntity.swift */,
+				1176BB1F97DDC44DF375EAD7 /* MovieItem.swift */,
 			);
 			path = MMMoviePlayer;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				13B4DFDB1F9E061000733C58 /* PlayerView.swift in Sources */,
 				1176B3DECB31CC824BC24180 /* NotificationExtension.swift in Sources */,
 				1176B522B6F326BF76423B85 /* MovieItemEntity.swift in Sources */,
+				1176B3E992985E1C73310901 /* MovieItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
