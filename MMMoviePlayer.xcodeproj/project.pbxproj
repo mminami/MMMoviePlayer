@@ -17,6 +17,7 @@
 		13350D8F1F9C501C005F6BD4 /* MMMoviePlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D8E1F9C501C005F6BD4 /* MMMoviePlayerUITests.swift */; };
 		13350D9D1F9C51C7005F6BD4 /* MoviePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13350D9C1F9C51C7005F6BD4 /* MoviePlayerView.swift */; };
 		13350D9F1F9C51E4005F6BD4 /* MoviePlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */; };
+		136AF05C1FA35D57008881A9 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AF05B1FA35D57008881A9 /* MovieListViewController.swift */; };
 		13B4DFDB1F9E061000733C58 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4DFDA1F9E061000733C58 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		13350D901F9C501C005F6BD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13350D9C1F9C51C7005F6BD4 /* MoviePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlayerView.swift; sourceTree = "<group>"; };
 		13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviePlayerView.xib; sourceTree = "<group>"; };
+		136AF05B1FA35D57008881A9 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		13B4DFDA1F9E061000733C58 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 				13350D9E1F9C51E4005F6BD4 /* MoviePlayerView.xib */,
 				1176B0D263236CFF66DC4387 /* NotificationExtension.swift */,
 				13B4DFDA1F9E061000733C58 /* PlayerView.swift */,
+				136AF05B1FA35D57008881A9 /* MovieListViewController.swift */,
 			);
 			path = MMMoviePlayer;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				13350D711F9C501C005F6BD4 /* ViewController.swift in Sources */,
 				13350D9D1F9C51C7005F6BD4 /* MoviePlayerView.swift in Sources */,
 				13350D6F1F9C501C005F6BD4 /* AppDelegate.swift in Sources */,
+				136AF05C1FA35D57008881A9 /* MovieListViewController.swift in Sources */,
 				13B4DFDB1F9E061000733C58 /* PlayerView.swift in Sources */,
 				1176B3DECB31CC824BC24180 /* NotificationExtension.swift in Sources */,
 			);
