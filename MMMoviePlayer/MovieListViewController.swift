@@ -110,8 +110,23 @@ extension MovieListViewController: UITableViewDataSource {
 
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MovieViewController()
-        vc.movieItem = movieItems[indexPath.row]
-        present(vc, animated: true)
+        UINavigationBar.appearance().tintColor = UIColor.white
+
+        let movieVC = MovieViewController()
+
+        let navigationVC = UINavigationController(rootViewController: movieVC)
+
+        let titleLabel = UILabel()
+        titleLabel.text = movieItems[indexPath.row].title
+        titleLabel.textColor = UIColor.white
+        titleLabel.sizeToFit()
+
+        movieVC.movieItem = movieItems[indexPath.row]
+        movieVC.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        movieVC.navigationController?.navigationBar.shadowImage = UIImage()
+        movieVC.navigationController?.navigationBar.isTranslucent = true
+        movieVC.navigationItem.titleView = titleLabel
+
+        present(navigationVC, animated: true)
     }
 }

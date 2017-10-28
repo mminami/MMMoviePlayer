@@ -16,12 +16,28 @@ class MovieViewController: UIViewController {
 
     var movieItem: MovieItem?
 
+    private lazy var closeButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+                title: "Close",
+                style: .plain,
+                target: self,
+                action: #selector(type(of: self).didTapCloseButton(_:))
+        )
+    }()
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.leftBarButtonItem = closeButton
 
         createMoviePlayerView()
 
@@ -44,17 +60,18 @@ class MovieViewController: UIViewController {
         moviePlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
 
         moviePlayerView.prepareToPlay()
+    }
+
+    @objc private func didTapCloseButton(_ sender: UIBarButtonItem) {
+        // TODO: Stop movie
+
+        dismiss(animated: true)
     }
 
     private func registerNotification() {
