@@ -34,9 +34,11 @@ class MoviePlayerView: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var playerView: PlayerView!
+    @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var progressTimeLabel: UILabel!
+    @IBOutlet weak var slashLabel: UILabel!
     @IBOutlet weak var durationTimeLabel: UILabel!
 
     // MARK: UIAction
@@ -85,7 +87,13 @@ class MoviePlayerView: UIView {
 
         translatesAutoresizingMaskIntoConstraints = false
 
+        contentView.backgroundColor = backgroundColor
+        playerView.backgroundColor = contentView.backgroundColor
+
+        controlView .backgroundColor = UIColor.clear
+
         progressTimeLabel.textColor = UIColor.white
+        slashLabel.textColor = UIColor.white
         durationTimeLabel.textColor = UIColor.white
 
         slider.addTarget(self, action: #selector(type(of: self).sliderDidChangeValue(_:)), for: .valueChanged)
