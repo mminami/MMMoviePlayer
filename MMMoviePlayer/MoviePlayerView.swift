@@ -23,9 +23,8 @@ extension Float {
     }
 }
 
-
 protocol MoviePlayerViewDataSource: class {
-    func movieURL(in view: MoviePlayerView) -> URL
+    func movieItem(in view: MoviePlayerView) -> MovieItem
 }
 
 private var playerObserveContext = 0
@@ -127,12 +126,12 @@ class MoviePlayerView: UIView {
     // MARK: API
 
     func prepareToPlay() {
-        guard let url = self.dataSource?.movieURL(in: self) else {
-            print("URL is not set")
+        guard let movieItem = self.dataSource?.movieItem(in: self) else {
+            print("MovieItem is not set")
             return
         }
 
-        let asset = AVURLAsset(url: url, options: nil)
+        let asset = AVURLAsset(url: movieItem.videoURL, options: nil)
         let item = AVPlayerItem(asset: asset)
         player.replaceCurrentItem(with: item)
 
