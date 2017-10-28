@@ -30,6 +30,13 @@ protocol MoviePlayerViewDataSource: class {
 private var playerObserveContext = 0
 
 class MoviePlayerView: UIView {
+    // MARK: enum
+
+    enum ControlUIStatus {
+        case hidden
+        case show
+    }
+
     // MARK: UI
 
     @IBOutlet var contentView: UIView!
@@ -68,6 +75,15 @@ class MoviePlayerView: UIView {
         #keyPath(AVPlayer.timeControlStatus),
     ]
 
+    private var controlUIStatus: ControlUIStatus = .show {
+        didSet {
+            switch controlUIStatus {
+            case .show: self.showControlUI()
+            case .hidden: self.hideControlUI()
+            }
+        }
+    }
+
     // MARK: Initializer
 
     override init(frame: CGRect) {
@@ -88,9 +104,12 @@ class MoviePlayerView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         contentView.backgroundColor = backgroundColor
+
         playerView.backgroundColor = contentView.backgroundColor
 
-        controlView .backgroundColor = UIColor.clear
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(type(of: self).didTapControlView(_:)))
+        controlView.addGestureRecognizer(recognizer)
+        controlView.backgroundColor = UIColor.clear
 
         progressTimeLabel.textColor = UIColor.white
         slashLabel.textColor = UIColor.white
@@ -161,6 +180,8 @@ class MoviePlayerView: UIView {
         }
 
         playerView.player?.play()
+
+        controlUIStatus = .hidden
     }
 
      @objc private func sliderDidChangeValue(_ slider: UISlider) {
@@ -169,6 +190,33 @@ class MoviePlayerView: UIView {
      }
 
     // MARK: Helper
+
+    @objc private func didTapControlView(_ recognizer: UIGestureRecognizer) {
+        switch controlUIStatus {
+        case .hidden: controlUIStatus = .show
+        case .show: controlUIStatus = .hidden
+        }
+    }
+
+    func showControlUI() {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.playButton.alpha = 1
+            self.progressTimeLabel.alpha = 1
+            self.durationTimeLabel.alpha = 1
+            self.slashLabel.alpha = 1
+            self.slider.alpha = 1
+        }, completion: { completion in })
+    }
+
+    func hideControlUI() {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            self.playButton.alpha = 0
+            self.progressTimeLabel.alpha = 0
+            self.durationTimeLabel.alpha = 0
+            self.slashLabel.alpha = 0
+            self.slider.alpha = 0
+        }, completion: { completion in })
+    }
 
     private func removeObserver() {
         for keyPath in observedKeyPaths {
