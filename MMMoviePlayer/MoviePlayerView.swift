@@ -27,6 +27,24 @@ protocol MoviePlayerViewDataSource: class {
     func movieItem(in view: MoviePlayerView) -> MovieItem
 }
 
+protocol MoviePlayerViewDelegate {
+    func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem?)
+    func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem?)
+    func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem?)
+    func moviePlayerView(_ view: MoviePlayerView, didPause movieItem: MovieItem?)
+    func moviePlayerView(_ view: MoviePlayerView, didPlay movieItem: MovieItem?)
+    func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem?)
+}
+
+extension MoviePlayerViewDelegate {
+    func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, didPause movieItem: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, didPlay movieItem: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem) {}
+}
+
 private var playerObserveContext = 0
 
 class MoviePlayerView: UIView {
@@ -63,8 +81,10 @@ class MoviePlayerView: UIView {
     // MARK: Property
 
     var dataSource: MoviePlayerViewDataSource?
+    var delegate: MoviePlayerViewDelegate?
 
-    private var player =  AVPlayer()
+    private var player = AVPlayer()
+    private var movieItem: MovieItem?
 
     private var timeObserverToken: Any?
 
@@ -157,20 +177,22 @@ class MoviePlayerView: UIView {
     // MARK: API
 
     func prepareToPlay() {
-        guard let movieItem = self.dataSource?.movieItem(in: self) else {
+        guard let newMovieItem = self.dataSource?.movieItem(in: self) else {
             print("MovieItem is not set")
             return
         }
 
-        let asset = AVURLAsset(url: movieItem.videoURL, options: nil)
+        movieItem = newMovieItem
+
+        let asset = AVURLAsset(url: newMovieItem.videoURL, options: nil)
         let item = AVPlayerItem(asset: asset)
         player.replaceCurrentItem(with: item)
 
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { [unowned self] time  in
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { [unowned self] time in
             let timeProgress = Float(CMTimeGetSeconds(time))
             self.slider.value = timeProgress
             self.progressTimeLabel.text = timeProgress.timeString
-         }
+        }
     }
 
     func play() {
@@ -184,10 +206,10 @@ class MoviePlayerView: UIView {
         controlUIStatus = .hidden
     }
 
-     @objc private func sliderDidChangeValue(_ slider: UISlider) {
-         let seekTime = CMTime(seconds: Double(slider.value), preferredTimescale: 1)
-         player.seek(to: seekTime)
-     }
+    @objc private func sliderDidChangeValue(_ slider: UISlider) {
+        let seekTime = CMTime(seconds: Double(slider.value), preferredTimescale: 1)
+        player.seek(to: seekTime)
+    }
 
     // MARK: Helper
 
@@ -226,7 +248,7 @@ class MoviePlayerView: UIView {
 
     override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
+                               change: [NSKeyValueChangeKey: Any]?,
                                context: UnsafeMutableRawPointer?) {
 
         guard context == &playerObserveContext else {
@@ -241,29 +263,15 @@ class MoviePlayerView: UIView {
         switch keyPath {
         case #keyPath(AVPlayer.currentItem.status):
             let status: AVPlayerItemStatus
-
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status = AVPlayerItemStatus(rawValue: statusNumber.intValue)!
             } else {
                 status = .unknown
             }
-
             switch status {
-            case .unknown:
-                NotificationCenter.default.post(
-                    name: Notification.Name.MMMoviePlayer.unknown.name,
-                    object: nil
-                )
-            case .readyToPlay:
-                NotificationCenter.default.post(
-                    name: Notification.Name.MMMoviePlayer.readyToPlay.name,
-                    object: nil
-                )
-            case .failed:
-                NotificationCenter.default.post(
-                    name: Notification.Name.MMMoviePlayer.failed.name,
-                    object: nil
-                )
+            case .unknown: delegate?.moviePlayerView(self, unknownToPlayWith: movieItem)
+            case .readyToPlay: delegate?.moviePlayerView(self, readyToPlayWith: movieItem)
+            case .failed: delegate?.moviePlayerView(self, failedToPlayWith: movieItem)
             }
         case #keyPath(AVPlayer.rate):
             print("rate: \(player.rate)")
@@ -297,21 +305,21 @@ class MoviePlayerView: UIView {
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status = AVPlayerTimeControlStatus(rawValue: statusNumber.intValue)!
             } else {
-                fatalError("Unknown statu")
+                fatalError("Unknown status")
             }
 
             switch status {
             case .paused:
-                print("paused")
                 playButton.setTitle("再生", for: .normal)
+                delegate?.moviePlayerView(self, didPause: movieItem)
             case .playing:
-                print("playing")
                 playButton.setTitle("停止", for: .normal)
+                delegate?.moviePlayerView(self, didPlay: movieItem)
             case .waitingToPlayAtSpecifiedRate:
-                print("waitingToPlayAtSpecifiedRate")
+                delegate?.moviePlayerView(self, waitingToPlayAtSpecifiedRate: movieItem)
             }
         default:
-            fatalError("Unexpected keypath: \(keyPath)")
+            fatalError("Unexpected keyPath: \(keyPath)")
         }
     }
 }

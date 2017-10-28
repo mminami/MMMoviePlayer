@@ -43,6 +43,7 @@ class MovieViewController: UIViewController {
     func createMoviePlayerView() {
         let moviePlayerView = MoviePlayerView()
         moviePlayerView.dataSource = self
+        moviePlayerView.delegate = self
         self.view.addSubview(moviePlayerView)
         self.moviePlayerView = moviePlayerView
     }
@@ -75,5 +76,33 @@ extension MovieViewController: MoviePlayerViewDataSource {
             fatalError("MovieItem is not set")
         }
         return newItem
+    }
+}
+
+extension MovieViewController: MoviePlayerViewDelegate {
+    func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem?) {
+        print("unknownToPlayWith")
+    }
+
+    func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem?) {
+        print("readyToPlayWith")
+
+        moviePlayerView.play()
+    }
+
+    func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem?) {
+        print("failedToPlayWith")
+    }
+
+    func moviePlayerView(_ view: MoviePlayerView, didPause movieItem: MovieItem?) {
+        print("didPause")
+    }
+
+    func moviePlayerView(_ view: MoviePlayerView, didPlay movieItem: MovieItem?) {
+        print("didPlay")
+    }
+
+    func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem?) {
+        print("waitingToPlayAtSpecifiedRate")
     }
 }
