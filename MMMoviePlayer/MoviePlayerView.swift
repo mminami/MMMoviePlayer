@@ -85,9 +85,11 @@ class MoviePlayerView: UIView {
 
         translatesAutoresizingMaskIntoConstraints = false
 
+        progressTimeLabel.textColor = UIColor.white
+        durationTimeLabel.textColor = UIColor.white
+
         self.addSubview(contentView)
     }
-
 
     // MARK: Life cycle
 
