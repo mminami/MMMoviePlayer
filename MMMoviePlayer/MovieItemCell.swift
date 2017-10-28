@@ -21,11 +21,13 @@ class MovieItemCell: UITableViewCell, CellProtocol, NibProtocol  {
     }
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
 
     func configure(_ movieItem: MovieItem) {
+        nameLabel.text = movieItem.presenterName
         titleLabel.text = movieItem.title
         descriptionLabel.text = movieItem.description
         durationLabel.text = movieItem.videoDurationText
