@@ -88,6 +88,8 @@ class MoviePlayerView: UIView {
         progressTimeLabel.textColor = UIColor.white
         durationTimeLabel.textColor = UIColor.white
 
+        slider.addTarget(self, action: #selector(type(of: self).sliderDidChangeValue(_:)), for: .valueChanged)
+
         self.addSubview(contentView)
     }
 
@@ -152,6 +154,11 @@ class MoviePlayerView: UIView {
 
         playerView.player?.play()
     }
+
+     @objc private func sliderDidChangeValue(_ slider: UISlider) {
+         let seekTime = CMTime(seconds: Double(slider.value), preferredTimescale: 1)
+         player.seek(to: seekTime)
+     }
 
     // MARK: Helper
 
