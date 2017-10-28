@@ -109,5 +109,9 @@ extension MovieListViewController: UITableViewDataSource {
 }
 
 extension MovieListViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MovieViewController()
+        vc.movieItem = movieItems[indexPath.row]
+        present(vc, animated: true)
+    }
 }
