@@ -25,10 +25,6 @@ class MovieViewController: UIViewController {
         )
     }()
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -42,8 +38,6 @@ class MovieViewController: UIViewController {
         createMoviePlayerView()
 
         layoutMoviePlayerView()
-
-        registerNotification()
     }
 
     func createMoviePlayerView() {
@@ -72,38 +66,6 @@ class MovieViewController: UIViewController {
         // TODO: Stop movie
 
         dismiss(animated: true)
-    }
-
-    private func registerNotification() {
-        NotificationCenter.default.addObserver(self,
-                selector: #selector(type(of: self).moviePlayerFailed(_:)),
-                name: Notification.Name.MMMoviePlayer.failed.name,
-                object: nil)
-        NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(type(of: self).moviePlayerReadyToPlay(_:)),
-                name: Notification.Name.MMMoviePlayer.readyToPlay.name,
-                object: nil)
-        NotificationCenter.default.addObserver(self,
-                selector: #selector(type(of: self).moviePlayerUnknown(_:)),
-                name: Notification.Name.MMMoviePlayer.unknown.name,
-                object: nil)
-    }
-}
-
-extension MovieViewController {
-    @objc private func moviePlayerFailed(_ notification: Notification) {
-        print("failed")
-    }
-
-    @objc private func moviePlayerReadyToPlay(_ notification: Notification) {
-        print("ready to play")
-
-        moviePlayerView.play()
-    }
-
-    @objc private func moviePlayerUnknown(_ notification: Notification) {
-        print("unknown")
     }
 }
 
