@@ -12,7 +12,7 @@ import UIKit
 class MovieListViewController: UIViewController {
     weak var tableView: UITableView!
 
-    private var downloadImageLocation = [IndexPath: URL]()
+    private var downloadImageData = [IndexPath: Data]()
 
     var movieItems = [MovieItem]()
 
@@ -78,34 +78,26 @@ extension MovieListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.configure(movieItem)
 
-        if let location = downloadImageLocation[indexPath] {
-            do {
-                let data = try Data(contentsOf: location)
-                let image = UIImage(data: data)
-                cell.thumbnailImageView.image = image
-            } catch  {
-                print("Can not load data from location: \(location)")
-            }
+        if let imageData = downloadImageData[indexPath] {
+            cell.thumbnailImageView.image = UIImage(data: imageData)
         } else {
-            DispatchQueue.global().async {
-                var request = URLRequest(url: movieItem.thumbnailURL)
-                request.httpMethod = "GET"
+            var request = URLRequest(url: movieItem.thumbnailURL)
+            request.httpMethod = "GET"
 
+            DispatchQueue.global().async {
                 let task = URLSession.shared.downloadTask(with: request) { (url: URL?, response: URLResponse?, error: Error?) -> Void in
                     DispatchQueue.main.async {
                         if let newURL = url {
                             do {
-                                let data = try Data(contentsOf: newURL, options: .alwaysMapped)
-                                let image = UIImage(data: data)
-                                cell.thumbnailImageView.image = image
-                                self.downloadImageLocation[indexPath] = newURL
+                                let newImageData = try Data(contentsOf: newURL)
+                                self.downloadImageData[indexPath] = newImageData
+                                cell.thumbnailImageView.image = UIImage(data: newImageData)
                             } catch {
-                                print("Can not load data from location: \(newURL)")
+                                print("Can not create image from location: \(newURL)")
                             }
                         }
                     }
                 }
-
                 task.resume()
             }
         }
