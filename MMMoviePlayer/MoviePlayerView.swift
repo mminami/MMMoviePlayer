@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-extension Float {
+public extension Float {
     var timeString: String {
         let components = NSDateComponents()
         components.second = Int(max(0.0, self))
@@ -23,11 +23,17 @@ extension Float {
     }
 }
 
-protocol MoviePlayerViewDataSource: class {
+public class PlayerView: UIView {
+    public override static var layerClass: AnyClass {
+        return AVPlayerLayer.self
+    }
+}
+
+public protocol MoviePlayerViewDataSource: class {
     func movieItem(in view: MoviePlayerView) -> MovieItem
 }
 
-protocol MoviePlayerViewDelegate {
+public protocol MoviePlayerViewDelegate {
     func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem?)
     func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem?)
     func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem?)
@@ -36,7 +42,7 @@ protocol MoviePlayerViewDelegate {
     func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem?)
 }
 
-extension MoviePlayerViewDelegate {
+public extension MoviePlayerViewDelegate {
     func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem) {}
     func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem) {}
     func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem) {}
@@ -47,7 +53,7 @@ extension MoviePlayerViewDelegate {
 
 private var playerObserveContext = 0
 
-class MoviePlayerView: UIView {
+public class MoviePlayerView: UIView {
     // MARK: enum
 
     enum ControlUIStatus {
@@ -69,12 +75,10 @@ class MoviePlayerView: UIView {
     // MARK: UIAction
 
     @IBAction func playButtonDidTap(_ sender: UIButton) {
-        if let status = playerView.player?.timeControlStatus {
-            switch status {
-            case .paused: player.play()
-            case .playing: player.pause()
-            case .waitingToPlayAtSpecifiedRate: break
-            }
+        switch player.timeControlStatus {
+        case .paused: player.play()
+        case .playing: player.pause()
+        case .waitingToPlayAtSpecifiedRate: break
         }
     }
 
@@ -112,7 +116,7 @@ class MoviePlayerView: UIView {
         commonInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         commonInit()
@@ -142,16 +146,17 @@ class MoviePlayerView: UIView {
 
     // MARK: Life cycle
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
 
         contentView.frame = self.bounds
     }
 
-    override func willMove(toSuperview newSuperview: UIView?) {
+    public override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
 
-        playerView.player = player
+        let playerLayer = playerView.layer as! AVPlayerLayer
+        playerLayer.player = player
 
         for keyPath in observedKeyPaths {
             self.player.addObserver(self,
@@ -161,7 +166,7 @@ class MoviePlayerView: UIView {
         }
     }
 
-    override func removeFromSuperview() {
+    public override func removeFromSuperview() {
         super.removeFromSuperview()
 
         player.pause()
@@ -201,7 +206,7 @@ class MoviePlayerView: UIView {
             return
         }
 
-        playerView.player?.play()
+        player.play()
 
         controlUIStatus = .hidden
     }
@@ -246,7 +251,7 @@ class MoviePlayerView: UIView {
         }
     }
 
-    override func observeValue(forKeyPath keyPath: String?,
+    public override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
                                change: [NSKeyValueChangeKey: Any]?,
                                context: UnsafeMutableRawPointer?) {

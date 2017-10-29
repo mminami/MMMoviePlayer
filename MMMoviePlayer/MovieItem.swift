@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct MovieItem {
+public struct MovieItem {
     let title: String
     let videoURL: URL
     let presenterName: String

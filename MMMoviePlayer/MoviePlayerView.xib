@@ -9,13 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviePlayerView" customModule="MMMoviePlayer" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviePlayerView" customModule="Demo" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="7eY-JP-L56" id="sra-Og-heh"/>
                 <outlet property="controlView" destination="6mP-f1-emf" id="Wfd-oE-ZEW"/>
                 <outlet property="durationTimeLabel" destination="xm2-MI-2Zd" id="w2i-Ti-cU0"/>
                 <outlet property="playButton" destination="syO-lt-MMc" id="4G5-i6-gA1"/>
-                <outlet property="playerView" destination="GIk-0l-f4w" id="mJK-61-6Dj"/>
+                <outlet property="playerView" destination="GIk-0l-f4w" id="4oz-vy-uJe"/>
                 <outlet property="progressTimeLabel" destination="aYR-dt-2oS" id="7CA-WK-p1K"/>
                 <outlet property="slashLabel" destination="i7V-S2-BXz" id="nLd-zy-Yij"/>
                 <outlet property="slider" destination="LXj-tz-Pgn" id="YK3-fP-GIG"/>
@@ -26,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIk-0l-f4w" customClass="PlayerView" customModule="MMMoviePlayer" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIk-0l-f4w" customClass="PlayerView" customModule="Demo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="325" height="236"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>

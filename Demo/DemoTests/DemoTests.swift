@@ -1,15 +1,15 @@
 //
-//  MMMoviePlayerTests.swift
-//  MMMoviePlayerTests
+//  DemoTests.swift
+//  DemoTests
 //
 //  Created by mminami on 2017/10/29.
 //  Copyright © 2017 mminami. All rights reserved.
 //
 
 import XCTest
-@testable import MMMoviePlayer
+@testable import Demo
 
-class MMMoviePlayerTests: XCTestCase {
+class DemoTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
