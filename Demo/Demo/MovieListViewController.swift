@@ -14,7 +14,13 @@ class MovieListViewController: UIViewController {
 
     private var downloadImageData = [IndexPath: Data]()
 
+    private var deviceOrientation: UIInterfaceOrientation?
+
     var movieItems = [MovieItem]()
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +32,29 @@ class MovieListViewController: UIViewController {
         createTableView()
 
         layoutTableView()
+
+        deviceOrientation = UIApplication.shared.statusBarOrientation
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(type(of: self).deviceOrientationDidChange(_:)),
+            name: Notification.Name.UIDeviceOrientationDidChange,
+            object: nil
+        )
+    }
+
+    @objc private func deviceOrientationDidChange(_ notificatron: Notification) {
+        deviceOrientation = UIApplication.shared.statusBarOrientation
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let orientation = deviceOrientation {
+            if orientation != UIApplication.shared.statusBarOrientation {
+                UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+            }
+        }
     }
 
     private func createMovieItems() {
