@@ -84,8 +84,8 @@ public class MoviePlayerView: UIView {
 
     // MARK: Property
 
-    var dataSource: MoviePlayerViewDataSource?
-    var delegate: MoviePlayerViewDelegate?
+    public var dataSource: MoviePlayerViewDataSource?
+    public var delegate: MoviePlayerViewDelegate?
 
     private var player = AVPlayer()
     private var movieItem: MovieItem?
@@ -123,7 +123,8 @@ public class MoviePlayerView: UIView {
     }
 
     private func commonInit() {
-        Bundle.main.loadNibNamed("\(MoviePlayerView.self)", owner: self, options: nil)
+        let bundle = Bundle(for: MoviePlayerView.self)
+        bundle.loadNibNamed("\(MoviePlayerView.self)", owner: self, options: nil)
 
         translatesAutoresizingMaskIntoConstraints = false
 
@@ -181,7 +182,7 @@ public class MoviePlayerView: UIView {
 
     // MARK: API
 
-    func prepareToPlay() {
+    public func prepareToPlay() {
         guard let newMovieItem = self.dataSource?.movieItem(in: self) else {
             print("MovieItem is not set")
             return
@@ -200,7 +201,7 @@ public class MoviePlayerView: UIView {
         }
     }
 
-    func play() {
+    public func play() {
         if self.player.currentItem?.status != AVPlayerItemStatus.readyToPlay {
             print("Can not play")
             return
