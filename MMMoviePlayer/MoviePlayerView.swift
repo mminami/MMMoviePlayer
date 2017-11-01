@@ -274,11 +274,7 @@ public class MoviePlayerView: UIView {
             } else {
                 status = .unknown
             }
-            switch status {
-            case .unknown: delegate?.moviePlayerView(self, unknownToPlayWith: movieItem)
-            case .readyToPlay: delegate?.moviePlayerView(self, readyToPlayWith: movieItem)
-            case .failed: delegate?.moviePlayerView(self, failedToPlayWith: movieItem)
-            }
+            handleStatus(status)
         case #keyPath(AVPlayer.rate):
             print("rate: \(player.rate)")
         case #keyPath(AVPlayer.currentItem.duration):
@@ -288,44 +284,59 @@ public class MoviePlayerView: UIView {
             } else {
                 duration = kCMTimeZero
             }
-
-            let isValidDuration = duration.isValid && duration.value != 0
-            let durationSeconds = isValidDuration ? Float(CMTimeGetSeconds(duration)) : 0.0
-            let currentTime = isValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
-
-            slider.isEnabled = isValidDuration
-            slider.maximumValue = durationSeconds
-            slider.value = currentTime
-
-            progressTimeLabel.isEnabled = isValidDuration
-            progressTimeLabel.text = currentTime.timeString
-
-            durationTimeLabel.isEnabled = isValidDuration
-            durationTimeLabel.text = durationSeconds.timeString
-
+            handleDuration(duration)
         case #keyPath(AVPlayer.timeControlStatus):
             print("timeControlStatus")
-
             let status: AVPlayerTimeControlStatus
-
             if let statusNumber = change?[.newKey] as? NSNumber {
                 status = AVPlayerTimeControlStatus(rawValue: statusNumber.intValue)!
             } else {
                 fatalError("Unknown status")
             }
-
-            switch status {
-            case .paused:
-                playButton.setTitle("再生", for: .normal)
-                delegate?.moviePlayerView(self, didPause: movieItem)
-            case .playing:
-                playButton.setTitle("停止", for: .normal)
-                delegate?.moviePlayerView(self, didPlay: movieItem)
-            case .waitingToPlayAtSpecifiedRate:
-                delegate?.moviePlayerView(self, waitingToPlayAtSpecifiedRate: movieItem)
-            }
+            handleTimeControlStatus(status)
         default:
             fatalError("Unexpected keyPath: \(keyPath)")
+        }
+    }
+}
+
+// MARK: Handel Player Status
+
+extension MoviePlayerView {
+    fileprivate func handleStatus( _ status: AVPlayerItemStatus) {
+        switch status {
+        case .unknown: delegate?.moviePlayerView(self, unknownToPlayWith: movieItem)
+        case .readyToPlay: delegate?.moviePlayerView(self, readyToPlayWith: movieItem)
+        case .failed: delegate?.moviePlayerView(self, failedToPlayWith: movieItem)
+        }
+    }
+
+    fileprivate func handleDuration(_ duration: CMTime) {
+        let isValidDuration = duration.isValid && duration.value != 0
+        let durationSeconds = isValidDuration ? Float(CMTimeGetSeconds(duration)) : 0.0
+        let currentTime = isValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
+
+        slider.isEnabled = isValidDuration
+        slider.maximumValue = durationSeconds
+        slider.value = currentTime
+
+        progressTimeLabel.isEnabled = isValidDuration
+        progressTimeLabel.text = currentTime.timeString
+
+        durationTimeLabel.isEnabled = isValidDuration
+        durationTimeLabel.text = durationSeconds.timeString
+    }
+
+    fileprivate func handleTimeControlStatus(_ status: AVPlayerTimeControlStatus) {
+        switch status {
+        case .paused:
+            playButton.setTitle("再生", for: .normal)
+            delegate?.moviePlayerView(self, didPause: movieItem)
+        case .playing:
+            playButton.setTitle("停止", for: .normal)
+            delegate?.moviePlayerView(self, didPlay: movieItem)
+        case .waitingToPlayAtSpecifiedRate:
+            delegate?.moviePlayerView(self, waitingToPlayAtSpecifiedRate: movieItem)
         }
     }
 }
