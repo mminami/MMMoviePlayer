@@ -35,6 +35,8 @@ class MovieViewController: UIViewController {
 
         navigationItem.leftBarButtonItem = closeButton
 
+        view.backgroundColor = UIColor.black
+
         createMoviePlayerView()
 
         layoutMoviePlayerView()
