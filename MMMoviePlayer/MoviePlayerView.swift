@@ -102,12 +102,18 @@ public class MoviePlayerView: UIView {
 
     private var timeObserverToken: Any?
 
-    private let observedKeyPaths = [
-        #keyPath(AVPlayer.currentItem.status),
-        #keyPath(AVPlayer.rate),
-        #keyPath(AVPlayer.currentItem.duration),
-        #keyPath(AVPlayer.timeControlStatus),
-    ]
+    private var observedKeyPaths: [String] {
+        if #available(iOS 10.0, *) {
+            return [#keyPath(AVPlayer.currentItem.status),
+                    #keyPath(AVPlayer.rate),
+                    #keyPath(AVPlayer.currentItem.duration),
+                    #keyPath(AVPlayer.timeControlStatus)]
+        } else {
+            return [#keyPath(AVPlayer.currentItem.status),
+                    #keyPath(AVPlayer.rate),
+                    #keyPath(AVPlayer.currentItem.duration)]
+        }
+    }
 
     private var controlUIStatus: ControlUIStatus = .show {
         didSet {
