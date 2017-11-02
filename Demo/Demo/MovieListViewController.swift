@@ -79,6 +79,8 @@ class MovieListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(MovieItemCell.nib, forCellReuseIdentifier: MovieItemCell.identifier)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
         self.view.addSubview(tableView)
         self.tableView = tableView
     }
