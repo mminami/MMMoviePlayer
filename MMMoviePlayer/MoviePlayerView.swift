@@ -43,12 +43,12 @@ public protocol MoviePlayerViewDelegate {
 }
 
 public extension MoviePlayerViewDelegate {
-    func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem) {}
-    func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem) {}
-    func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem) {}
-    func moviePlayerView(_ view: MoviePlayerView, didPause movieItem: MovieItem) {}
-    func moviePlayerView(_ view: MoviePlayerView, didPlay movieItem: MovieItem) {}
-    func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem) {}
+    func moviePlayerView(_ view: MoviePlayerView, unknownToPlayWith: MovieItem?) {}
+    func moviePlayerView(_ view: MoviePlayerView, readyToPlayWith: MovieItem?) {}
+    func moviePlayerView(_ view: MoviePlayerView, failedToPlayWith: MovieItem?) {}
+    func moviePlayerView(_ view: MoviePlayerView, didPause movieItem: MovieItem?) {}
+    func moviePlayerView(_ view: MoviePlayerView, didPlay movieItem: MovieItem?) {}
+    func moviePlayerView(_ view: MoviePlayerView, waitingToPlayAtSpecifiedRate movieItem: MovieItem?) {}
 }
 
 private var playerObserveContext = 0
