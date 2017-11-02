@@ -325,6 +325,18 @@ public class MoviePlayerView: UIView {
 // MARK: Handel Player Status
 
 extension MoviePlayerView {
+    fileprivate func isValid(_ time: CMTime) -> Bool {
+        return time.isValid && time.value != 0
+    }
+
+    fileprivate func durationSeconds(_ time: CMTime) -> Float64 {
+        return isValid(time) ? CMTimeGetSeconds(time) : 0
+    }
+
+    fileprivate func currentSeconds(_ time: CMTime) -> Float64 {
+        return isValid(time) ? CMTimeGetSeconds(player.currentTime()) : 0
+    }
+
     fileprivate func handleStatus( _ status: AVPlayerItemStatus) {
         switch status {
         case .unknown: delegate?.moviePlayerView(self, unknownToPlayWith: movieItem)
@@ -333,20 +345,16 @@ extension MoviePlayerView {
         }
     }
 
-    fileprivate func handleDuration(_ duration: CMTime) {
-        let isValidDuration = duration.isValid && duration.value != 0
-        let durationSeconds = isValidDuration ? Float(CMTimeGetSeconds(duration)) : 0.0
-        let currentTime = isValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
+    fileprivate func handleDuration(_ time: CMTime) {
+        slider.isEnabled = isValid(time)
+        slider.maximumValue = Float(durationSeconds(time))
+        slider.value = Float(currentSeconds(time))
 
-        slider.isEnabled = isValidDuration
-        slider.maximumValue = durationSeconds
-        slider.value = currentTime
+        progressTimeLabel.isEnabled = isValid(time)
+        progressTimeLabel.text = Int(currentSeconds(time)).timeString
 
-        progressTimeLabel.isEnabled = isValidDuration
-        progressTimeLabel.text = Int(currentTime).timeString
-
-        durationTimeLabel.isEnabled = isValidDuration
-        durationTimeLabel.text = Int(durationSeconds).timeString
+        durationTimeLabel.isEnabled = isValid(time)
+        durationTimeLabel.text = Int(durationSeconds(time)).timeString
     }
 
     @available(iOS 10.0, *)
