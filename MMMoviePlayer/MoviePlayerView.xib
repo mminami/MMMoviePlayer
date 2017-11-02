@@ -12,9 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviePlayerView" customModule="Demo" customModuleProvider="target">
             <connections>
+                <outlet property="backwardButton" destination="NmZ-sL-KH3" id="Zek-UF-ujj"/>
                 <outlet property="contentView" destination="7eY-JP-L56" id="sra-Og-heh"/>
                 <outlet property="controlView" destination="6mP-f1-emf" id="Wfd-oE-ZEW"/>
                 <outlet property="durationTimeLabel" destination="xm2-MI-2Zd" id="w2i-Ti-cU0"/>
+                <outlet property="forwardButton" destination="esU-sA-12g" id="LOG-zF-JTZ"/>
                 <outlet property="playButton" destination="syO-lt-MMc" id="4G5-i6-gA1"/>
                 <outlet property="playerView" destination="GIk-0l-f4w" id="4oz-vy-uJe"/>
                 <outlet property="progressTimeLabel" destination="aYR-dt-2oS" id="7CA-WK-p1K"/>

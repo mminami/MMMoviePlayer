@@ -65,6 +65,8 @@ public class MoviePlayerView: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var playerView: PlayerView!
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet weak var backwardButton: UIButton!
     @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var slider: UISlider!
@@ -265,6 +267,8 @@ public class MoviePlayerView: UIView {
     func showControlUI() {
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.playButton.alpha = 1
+            self.forwardButton.alpha = 1
+            self.backwardButton.alpha = 1
             self.progressTimeLabel.alpha = 1
             self.durationTimeLabel.alpha = 1
             self.slashLabel.alpha = 1
@@ -275,6 +279,8 @@ public class MoviePlayerView: UIView {
     func hideControlUI() {
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.playButton.alpha = 0
+            self.forwardButton.alpha = 0
+            self.backwardButton.alpha = 0
             self.progressTimeLabel.alpha = 0
             self.durationTimeLabel.alpha = 0
             self.slashLabel.alpha = 0
