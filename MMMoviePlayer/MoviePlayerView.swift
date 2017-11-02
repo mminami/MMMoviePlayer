@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 import AVFoundation
 
-public extension Float {
+public extension Int {
     var timeString: String {
         let components = NSDateComponents()
-        components.second = Int(max(0.0, self))
+        components.second = self
 
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
@@ -213,7 +213,7 @@ public class MoviePlayerView: UIView {
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { [unowned self] time in
             let timeProgress = Float(CMTimeGetSeconds(time))
             self.slider.value = timeProgress
-            self.progressTimeLabel.text = timeProgress.timeString
+            self.progressTimeLabel.text = Int(timeProgress).timeString
         }
     }
 
@@ -343,10 +343,10 @@ extension MoviePlayerView {
         slider.value = currentTime
 
         progressTimeLabel.isEnabled = isValidDuration
-        progressTimeLabel.text = currentTime.timeString
+        progressTimeLabel.text = Int(currentTime).timeString
 
         durationTimeLabel.isEnabled = isValidDuration
-        durationTimeLabel.text = durationSeconds.timeString
+        durationTimeLabel.text = Int(durationSeconds).timeString
     }
 
     @available(iOS 10.0, *)
