@@ -212,6 +212,10 @@ public class MoviePlayerView: UIView {
         controlUIStatus = .hidden
     }
 
+    public func pause() {
+        player.pause()
+    }
+
     @objc private func sliderDidChangeValue(_ slider: UISlider) {
         let seekTime = CMTime(seconds: Double(slider.value), preferredTimescale: 1)
         player.seek(to: seekTime)

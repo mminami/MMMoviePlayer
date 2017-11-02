@@ -64,7 +64,7 @@ class MovieViewController: UIViewController {
     }
 
     @objc private func didTapCloseButton(_ sender: UIBarButtonItem) {
-        // TODO: Stop movie
+        moviePlayerView.pause()
 
         dismiss(animated: true)
     }
