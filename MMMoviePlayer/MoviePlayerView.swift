@@ -92,6 +92,22 @@ public class MoviePlayerView: UIView {
         }
     }
 
+    @IBAction func didTapForwardButton(_ sender: UIButton) {
+        if isValid(player.currentTime()) {
+            let seconds = currentSeconds(player.currentTime()) + 10
+            let time = CMTime(seconds: seconds, preferredTimescale: 1)
+            player.seek(to: time)
+        }
+    }
+
+    @IBAction func didTapBackwardButton(_ sender: UIButton) {
+        if isValid(player.currentTime()) {
+            let seconds = currentSeconds(player.currentTime()) - 10
+            let time = CMTime(seconds: seconds, preferredTimescale: 1)
+            player.seek(to: time)
+        }
+    }
+
     // MARK: Property
 
     public var dataSource: MoviePlayerViewDataSource?

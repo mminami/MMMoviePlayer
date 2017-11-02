@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -64,17 +65,35 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esU-sA-12g">
+                            <rect key="frame" x="193" y="103" width="33" height="30"/>
+                            <state key="normal" title="10-&gt;"/>
+                            <connections>
+                                <action selector="didTapForwardButton:" destination="-1" eventType="touchUpInside" id="7QG-zR-zSo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmZ-sL-KH3">
+                            <rect key="frame" x="99" y="103" width="33" height="30"/>
+                            <state key="normal" title="&lt;-10"/>
+                            <connections>
+                                <action selector="didTapBackwardButton:" destination="-1" eventType="touchUpInside" id="kAH-mD-zMX"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="esU-sA-12g" firstAttribute="leading" secondItem="syO-lt-MMc" secondAttribute="trailing" constant="15" id="64J-1p-985"/>
                         <constraint firstItem="i7V-S2-BXz" firstAttribute="leading" secondItem="aYR-dt-2oS" secondAttribute="trailing" constant="2" id="9Q8-YK-v6j"/>
                         <constraint firstItem="xm2-MI-2Zd" firstAttribute="leading" secondItem="i7V-S2-BXz" secondAttribute="trailing" constant="2" id="Azg-8F-GyE"/>
                         <constraint firstItem="xm2-MI-2Zd" firstAttribute="centerY" secondItem="i7V-S2-BXz" secondAttribute="centerY" id="CbY-rh-Qc8"/>
                         <constraint firstItem="syO-lt-MMc" firstAttribute="centerY" secondItem="QJN-vW-Csu" secondAttribute="centerY" id="LAh-Cm-X5k"/>
                         <constraint firstItem="LXj-tz-Pgn" firstAttribute="leading" secondItem="xm2-MI-2Zd" secondAttribute="trailing" constant="10" id="OJa-qY-1gc"/>
+                        <constraint firstItem="syO-lt-MMc" firstAttribute="leading" secondItem="NmZ-sL-KH3" secondAttribute="trailing" constant="15" id="Oap-bd-LiF"/>
                         <constraint firstItem="aYR-dt-2oS" firstAttribute="centerY" secondItem="LXj-tz-Pgn" secondAttribute="centerY" id="OxS-8C-hnc"/>
                         <constraint firstItem="QJN-vW-Csu" firstAttribute="bottom" secondItem="LXj-tz-Pgn" secondAttribute="bottom" constant="8" id="SWc-Nd-RcJ"/>
+                        <constraint firstItem="NmZ-sL-KH3" firstAttribute="centerY" secondItem="syO-lt-MMc" secondAttribute="centerY" id="TLZ-QS-n7c"/>
                         <constraint firstItem="QJN-vW-Csu" firstAttribute="bottom" secondItem="aYR-dt-2oS" secondAttribute="bottom" constant="12.5" id="U5y-If-0j1"/>
+                        <constraint firstItem="esU-sA-12g" firstAttribute="centerY" secondItem="syO-lt-MMc" secondAttribute="centerY" id="aCv-2y-AUD"/>
                         <constraint firstItem="i7V-S2-BXz" firstAttribute="centerY" secondItem="aYR-dt-2oS" secondAttribute="centerY" id="fuy-O1-rcG"/>
                         <constraint firstItem="aYR-dt-2oS" firstAttribute="width" secondItem="xm2-MI-2Zd" secondAttribute="width" id="nXK-ts-VsD"/>
                         <constraint firstItem="aYR-dt-2oS" firstAttribute="leading" secondItem="QJN-vW-Csu" secondAttribute="leading" constant="20" id="vGB-Wq-Tgk"/>
