@@ -75,10 +75,20 @@ public class MoviePlayerView: UIView {
     // MARK: UIAction
 
     @IBAction func playButtonDidTap(_ sender: UIButton) {
-        switch player.timeControlStatus {
-        case .paused: player.play()
-        case .playing: player.pause()
-        case .waitingToPlayAtSpecifiedRate: break
+        if #available(iOS 10.0, *) {
+            switch player.timeControlStatus {
+            case .paused: player.play()
+            case .playing: player.pause()
+            case .waitingToPlayAtSpecifiedRate: break
+            }
+        } else {
+            if player.rate == 0 {
+                player.play()
+                delegate?.moviePlayerView(self, didPause: movieItem)
+            } else {
+                player.pause()
+                delegate?.moviePlayerView(self, didPlay: movieItem)
+            }
         }
     }
 
@@ -291,13 +301,15 @@ public class MoviePlayerView: UIView {
             handleDuration(duration)
         case #keyPath(AVPlayer.timeControlStatus):
             print("timeControlStatus")
-            let status: AVPlayerTimeControlStatus
-            if let statusNumber = change?[.newKey] as? NSNumber {
-                status = AVPlayerTimeControlStatus(rawValue: statusNumber.intValue)!
-            } else {
-                fatalError("Unknown status")
+            if #available(iOS 10.0, *) {
+                let status: AVPlayerTimeControlStatus
+                if let statusNumber = change?[.newKey] as? NSNumber {
+                    status = AVPlayerTimeControlStatus(rawValue: statusNumber.intValue)!
+                } else {
+                    fatalError("Unknown status")
+                }
+                handleTimeControlStatus(status)
             }
-            handleTimeControlStatus(status)
         default:
             fatalError("Unexpected keyPath: \(keyPath)")
         }
@@ -331,6 +343,7 @@ extension MoviePlayerView {
         durationTimeLabel.text = durationSeconds.timeString
     }
 
+    @available(iOS 10.0, *)
     fileprivate func handleTimeControlStatus(_ status: AVPlayerTimeControlStatus) {
         switch status {
         case .paused:
